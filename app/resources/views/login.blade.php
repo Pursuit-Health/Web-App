@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Login</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -66,27 +66,12 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
             <div class="content">
-                <div class="title m-b-md">
-                    Pursuit Web App (work in progress)
-                </div>
-
-                <div class="links">
-                    <a href="/login">Login</a>
-                    <a href="/register-trainer">Register as Trainer</a>
-                    <a href="/register-client">Register as Client</a>
-                </div>
+                {{ Form::open(array('url' => 'do-login')) }}
+                  <input type="text" name="email" placeholder="email"><br>
+                  <input type="text" name="password" placeholder="password"><br>
+                  <input type="submit">
+                {{ Form::close() }}
             </div>
         </div>
     </body>

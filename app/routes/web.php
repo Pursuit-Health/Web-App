@@ -15,6 +15,36 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::post('/do-login', function () {
+  try{
+    $client = new GuzzleHttp\Client();
+    $response = $client->request('POST', 'https://gs.arizonawebdevelopment.com/public/v1/auth/login', [
+      'headers' => ['Accept'     => 'application/json'],
+        'form_params' => [
+            'password' => $_POST['password'],
+            'email' => $_POST['email']
+        ]
+    ]);
+    
+    if($response->getStatusCode() == 200){
+      return view('user/dashboard');
+    } else {
+      dd($response);
+    }
+    return view('/login');
+  }
+  catch (Exception $e)
+  {
+    $error = $e->getMessage();
+    dd($error);
+    return view('/login');
+  }
+});
+
 Route::get('/register-trainer', function () {
     $data['name'] = '';
     $data['birthday'] = '';
