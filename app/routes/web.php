@@ -19,7 +19,13 @@ Route::get('/login', function () {
     return view('login');
 });
 
+Route::get('/forgot-password', function () {
+    return view('forgot-password');
+});
+
 Route::post('/do-login', function () {
+  $data = [];
+  
   try{
     $client = new GuzzleHttp\Client();
     $response = $client->request('POST', 'https://gs.arizonawebdevelopment.com/public/v1/auth/login', [
@@ -33,16 +39,46 @@ Route::post('/do-login', function () {
     if($response->getStatusCode() == 200){
       return view('user/dashboard');
     } else {
-      dd($response);
+      $data['error'] = $response;
     }
-    return view('/login');
+    
   }
   catch (Exception $e)
   {
     $error = $e->getMessage();
-    dd($error);
-    return view('/login');
+    $data['error'] = $error;
   }
+  
+  return view('/login')->with('message',$data['error'])->with('email',$_POST["email"]);
+});
+
+
+Route::post('/do-forgot-password', function () {
+  $data = [];
+  
+  try{
+    $client = new GuzzleHttp\Client();
+    $response = $client->request('POST', 'https://gs.arizonawebdevelopment.com/public/v1/auth/forgot-password', [
+      'headers' => ['Accept'     => 'application/json'],
+        'form_params' => [
+          'email' => $_POST['email']
+        ]
+    ]);
+    
+    if($response->getStatusCode() == 200){
+      return view('forgot-password-sent');
+    } else {
+      $data['error'] = $response;
+    }
+    
+  }
+  catch (Exception $e)
+  {
+    $error = $e->getMessage();
+    $data['error'] = $error;
+  }
+  
+  return view('/forgot-password')->with('message',$data['error'])->with('email',$_POST["email"]);
 });
 
 Route::get('/register-trainer', function () {

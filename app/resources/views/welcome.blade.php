@@ -84,6 +84,7 @@
 
                 <div class="links">
                     <a href="/login">Login</a>
+                    <a href="/forgot-password">Forgot Password</a>
                     <a href="/register-trainer">Register as Trainer</a>
                     <a href="/register-client">Register as Client</a>
                 </div>

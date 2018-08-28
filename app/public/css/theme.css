@@ -1,0 +1,80 @@
+:root {
+  --bright-green-bg: #50d2c2;
+}
+html, body {
+    background-color: #1D1D26;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    height: 100vh;
+    margin: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+    width:960px;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+/* clean up above code */
+
+/* beautiful forms */
+input {
+  border:none;
+  height:45px;
+  width:100%;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
+  font-family: system,sans-serif;
+  font-size: 15px;
+  color: #666;
+}
+
+input[type="submit"]{
+  background-color: var(--bright-green-bg);
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 20px;
+}

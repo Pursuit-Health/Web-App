@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Login</title>
+        <title>Forgot Password</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -17,16 +17,7 @@
     <body>
         <div class="flex-center position-ref full-height">
             <div class="content">
-              @if(isset($message))
-                <div class="alert alert-danger">
-                  <p>{{ $message }}</p>
-                </div>
-              @endif
-                {{ Form::open(array('url' => 'do-login')) }}
-                  <input type="email" name="email" placeholder="email" value="{{$email or "" }}"required><br>
-                  <input type="password" name="password" placeholder="password" value="" required><br>
-                  <input type="submit">
-                {{ Form::close() }}
+              <h1>Please check your email.</h1>
             </div>
         </div>
     </body>
