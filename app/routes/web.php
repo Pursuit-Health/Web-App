@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
 Route::get('/login', function () {
@@ -23,34 +23,8 @@ Route::get('/forgot-password', function () {
     return view('forgot-password');
 });
 
-Route::post('/do-login', function () {
-  $data = [];
-  
-  try{
-    $client = new GuzzleHttp\Client();
-    $response = $client->request('POST', 'https://gs.arizonawebdevelopment.com/public/v1/auth/login', [
-      'headers' => ['Accept'     => 'application/json'],
-        'form_params' => [
-            'password' => $_POST['password'],
-            'email' => $_POST['email']
-        ]
-    ]);
-    
-    if($response->getStatusCode() == 200){
-      return view('user/dashboard');
-    } else {
-      $data['error'] = $response;
-    }
-    
-  }
-  catch (Exception $e)
-  {
-    $error = $e->getMessage();
-    $data['error'] = $error;
-  }
-  
-  return view('/login')->with('message',$data['error'])->with('email',$_POST["email"]);
-});
+Route::post('/do-login', 'Auth\LoginController@login');
+
 
 
 Route::post('/do-forgot-password', function () {

@@ -2,38 +2,49 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use GuzzleHttp\Client;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
+    private $client;
+    
+    function __construct(){
+      $this->client = new Client([
+          // Base URI is used with relative requests
+          'base_uri' => env('API_URL'),
+          // You can set any number of default request options.
+          'timeout'  => 5.0,
+      ]);
+      
+      
+    }
+    function login(){
+      $data = [];
 
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
+      try{
+        $response = $this->client->request('POST', 'https://gs.arizonawebdevelopment.com/public/v1/auth/login', [
+          'headers' => ['Accept' => 'application/json'],
+            'form_params' => [
+                'password' => $_POST['password'],
+                'email' => $_POST['email']
+            ]
+        ]);
+        
+        if($response->getStatusCode() == 200){
+          return view('user/dashboard');
+        } else {
+          $data['error'] = $response;
+        }
+        
+      }
+      catch (Exception $e)
+      {
+        $error = $e->getMessage();
+        $data['error'] = $error;
+      }
+      
+      return view('/login')->with('message',$data['error'])->with('email',$_POST["email"]);
     }
 }
