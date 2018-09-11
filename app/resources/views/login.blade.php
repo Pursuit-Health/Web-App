@@ -15,8 +15,9 @@
 
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
+        <div class="container">
+            <div class="row">
+              <div class="col-md-6">
               @if(isset($message))
                 <div class="alert alert-danger">
                   <p>{{ $message }}</p>
@@ -27,6 +28,7 @@
                   <input type="password" name="password" placeholder="password" value="" required><br>
                   <input type="submit">
                 {{ Form::close() }}
+              </div>
             </div>
         </div>
     </body>
