@@ -11,22 +11,27 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
-        <link href="/css/theme.css" rel="stylesheet">
+        <link href="/css/app.css" rel="stylesheet">
 
     </head>
     <body>
         <div class="container">
-            <div class="row">
-              <div class="col-md-6">
+            <div class="row full-height align-items-center justify-content-center">
+              <div class="col-md-4">
+                <img src="https://pursuithealth.io/wp-content/themes/understrap-child/images/ph-logo.png" alt="pursuit logo" class="img-fluid d-block mx-auto pb-5">
               @if(isset($message))
                 <div class="alert alert-danger">
                   <p>{{ $message }}</p>
                 </div>
               @endif
                 {{ Form::open(array('url' => 'do-login')) }}
-                  <input type="email" name="email" placeholder="email" value="{{$email or "" }}"required><br>
-                  <input type="password" name="password" placeholder="password" value="" required><br>
-                  <input type="submit">
+                  <div class="form-group">
+                    <input type="email" name="email" placeholder="email" class="form-control" value="{{$email or "" }}"required><br>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="password" value="" required><br>
+                  </div>
+                  <input type="submit" class="btn btn-green btn-block">
                 {{ Form::close() }}
               </div>
             </div>

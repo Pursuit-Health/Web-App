@@ -15,7 +15,7 @@ class LoginController extends Controller
           // Base URI is used with relative requests
           'base_uri' => env('API_URL'),
           // You can set any number of default request options.
-          'timeout'  => 5.0,
+          'timeout'  => 15.0,
       ]);
       
       
@@ -24,7 +24,7 @@ class LoginController extends Controller
       $data = [];
 
       try{
-        $response = $this->client->request('POST', 'https://gs.arizonawebdevelopment.com/public/v1/auth/login', [
+        $response = $this->client->request('POST', '/public/v1/auth/login', [
           'headers' => ['Accept' => 'application/json'],
             'form_params' => [
                 'password' => $_POST['password'],
@@ -37,7 +37,10 @@ class LoginController extends Controller
         } else {
           $data['error'] = $response;
         }
-        
+      }
+      catch (ClientException $e) {
+        echo Psr7\str($e->getRequest());
+        echo Psr7\str($e->getResponse());
       }
       catch (Exception $e)
       {
