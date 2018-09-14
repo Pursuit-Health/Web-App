@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -33,16 +35,31 @@ class LoginController extends Controller
         ]);
         
         if($response->getStatusCode() == 200){
-          return view('user/dashboard');
+          $json = json_decode($response->getBody()->getContents());
+
+          $user = new User();
+          $user->id = $json->data->id;
+          $user->name = $json->data->name;
+          $user->user_type = $json->meta->user_type;
+          
+          session(['user'=>$user]);
+          
+          return redirect('dashboard');
         } else {
           $data['error'] = $response;
         }
       }
-      catch (ClientException $e) {
-        echo Psr7\str($e->getRequest());
-        echo Psr7\str($e->getResponse());
+      catch (\GuzzleHttp\Exception\ClientException $e) {
+        switch($e->getResponse()->getStatusCode()){
+          case "401":
+            $data['error'] = 'Invalid email or password entered.';
+          break;
+          default:
+            $ex = json_decode($e->getResponse()->getBody());
+            $data['error'] = $ex->message;
+        }        
       }
-      catch (Exception $e)
+      catch (\Exception $e)
       {
         $error = $e->getMessage();
         $data['error'] = $error;

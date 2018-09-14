@@ -19,6 +19,14 @@ Route::get('/login', function () {
     return view('login');
 });
 
+Route::get('/dashboard', function () {
+    return view('user.dashboard');
+});
+
+Route::get('/dashboard/profile', function () {
+    return view('user.profile');
+})->name('profile');
+
 Route::get('/forgot-password', function () {
     return view('forgot-password');
 });
