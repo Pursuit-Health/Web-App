@@ -17,7 +17,7 @@
       <?php $nav_template = 'templates.nav-'.session('user')->user_type;?>
       @include($nav_template)
       
-      
+      <h1 class="text-white">not sure what to show here when they first login...</h1>
       <script src="/js/app.js"></script>
     </body>
 </html>
