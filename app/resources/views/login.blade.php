@@ -26,12 +26,15 @@
               @endif
                 {{ Form::open(array('url' => 'do-login')) }}
                   <div class="form-group">
-                    <input type="email" name="email" placeholder="email" class="form-control" value="{{$email or "" }}"required><br>
+                    <input type="email" name="email" placeholder="email" class="form-control" value="{{$email or "" }}"required>
                   </div>
                   <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="password" value="" required><br>
+                    <input type="password" name="password" class="form-control" placeholder="password" value="" required>
+                    <a href="{{route('forgot-password')}}" class="small float-right">forgot password?</a>
                   </div>
-                  <input type="submit" class="btn btn-green btn-block">
+                  <div class="form-group mt-5">
+                    <input type="submit" value="Login" class="btn btn-green btn-block">
+                  </div>
                 {{ Form::close() }}
               </div>
             </div>

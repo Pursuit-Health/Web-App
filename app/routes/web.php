@@ -23,13 +23,11 @@ Route::get('/dashboard', function () {
     return view('user.dashboard');
 });
 
-Route::get('/dashboard/profile', function () {
-    return view('user.profile');
-})->name('profile');
+Route::get('/dashboard/profile', 'ProfileController@index')->name('profile');
 
 Route::get('/forgot-password', function () {
     return view('forgot-password');
-});
+})->name('forgot-password');
 
 Route::post('/do-login', 'Auth\LoginController@login');
 
@@ -50,14 +48,16 @@ Route::post('/do-forgot-password', function () {
     if($response->getStatusCode() == 200){
       return view('forgot-password-sent');
     } else {
-      $data['error'] = $response;
+      $j = json_decode($response->getBody());
+      dd($j);
+      $data['error'] = $j->message ;
     }
     
   }
-  catch (Exception $e)
+  catch (GuzzleHttp\Exception\ClientException $e)
   {
-    $error = $e->getMessage();
-    $data['error'] = $error;
+    $j = json_decode($e->getResponse()->getBody());
+    $data['error'] = $j->message;
   }
   
   return view('/forgot-password')->with('message',$data['error'])->with('email',$_POST["email"]);

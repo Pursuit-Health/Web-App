@@ -1,23 +1,20 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('templates.master')
+@section('title','Dashboard (profile)')
 
-        <title>Dashboard (profile)</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <link href="/css/app.css" rel="stylesheet">
-    </head>
-    <body>
-      <?php $nav_template = 'templates.nav-'.session('user')->user_type;?>
-      @include($nav_template)
-      
-      
-      <script src="/js/app.js"></script>
-    </body>
-</html>
+@section('content')
+<div class="container">
+  <div class="row mt-5">
+    <div class="col">
+    <div class="card">
+      <img class="card-img-top" src="..." alt="">
+      <div class="card-body">
+        <h5 class="card-title">{{$settings->data->name}}<br>{{$settings->data->email}}</h5>
+        <h6 class="lead float-right text-right clearfix">Trainer Code: {{$settings->meta->invitation_code}}</h6>
+        <p>Client Requests: <span class="badge badge-secondary">{{$settings->meta->pending_client_count}}</span></p>
+        <a href="#" class="btn btn-primary float-right">View Templates</a>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+@endsection

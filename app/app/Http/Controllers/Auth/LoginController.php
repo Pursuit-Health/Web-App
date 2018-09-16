@@ -19,18 +19,18 @@ class LoginController extends Controller
           // You can set any number of default request options.
           'timeout'  => 15.0,
       ]);
-      
-      
     }
-    function login(){
+    
+    function login(Request $request){
+
       $data = [];
 
       try{
-        $response = $this->client->request('POST', '/public/v1/auth/login', [
+        $response = $this->client->request('POST', 'auth/login', [
           'headers' => ['Accept' => 'application/json'],
             'form_params' => [
-                'password' => $_POST['password'],
-                'email' => $_POST['email']
+                'password' => $request->password,
+                'email' => $request->email
             ]
         ]);
         
@@ -41,8 +41,9 @@ class LoginController extends Controller
           $user->id = $json->data->id;
           $user->name = $json->data->name;
           $user->user_type = $json->meta->user_type;
+          $user->token = $json->meta->token;
           
-          session(['user'=>$user]);
+          $request->session()->put('user',$user);
           
           return redirect('dashboard');
         } else {
