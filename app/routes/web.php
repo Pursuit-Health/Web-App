@@ -68,15 +68,9 @@ Route::get('/register-trainer', function () {
     $data['birthday'] = '';
     $data['email'] = '';
     return view('register.trainer',$data);
-});
+})->name('register-trainer');
 
-Route::get('/register-client', function () {
-    $data['name'] = '';
-    $data['birthday'] = '';
-    $data['email'] = '';
-    $data['trainerCode'] = '';
-    return view('register.client',$data);
-});
+Route::get('/register-client','RegisterUserController@needTrainerID')->name('register-client');
 
 Route::post('/register/{type}', function ($type) {
   $error = '';
