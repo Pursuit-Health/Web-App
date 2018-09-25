@@ -13,21 +13,26 @@ class RegisterUserController extends Controller
        $data['name'] = '';
        $data['birthday'] = '';
        $data['email'] = '';
-       $data['trainerCode'] = '';
+       $data['trainerCode'] = session('trainerID','');
        return view('register.client',$data);
   }
   
-  public function needTrainerID(){
-    return view('register.providerTrainerID');
+  public function needTrainerID(Request $request){
+    if(!empty($request->trainer) && (session('trainerID') == $request->trainer)){
+      return $this->index();
+    } else {
+      return view('register.providerTrainerID');
+    }
   }
   
-  public function createAccount(Request $request){
+  public function verifyTrainerID(Request $request){
     $client = new Client();
 
     try{
       $response = $client->request('GET',env('API_URL').'trainer/get/'.strtoupper($request->trainerCode),['headers'=>
                   ['Accept'     => 'application/json']]);
       $body = json_decode($response->getBody());
+      $request->session()->put('trainerID', strtoupper($request->trainerCode));
       return view('register.providerTrainerID')->with('success',$body);
     } catch (ClientException $e){
       if ($e->hasResponse()) {

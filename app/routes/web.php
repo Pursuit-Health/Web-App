@@ -71,7 +71,7 @@ Route::get('/register-trainer', function () {
 })->name('register-trainer');
 
 Route::get('/register-client','RegisterUserController@needTrainerID')->name('register-client');
-Route::post('/register-client','RegisterUserController@createAccount')->name('register-client');
+Route::post('/register-client','RegisterUserController@verifyTrainerID')->name('register-client');
 
 Route::post('/register/{type}', function ($type) {
   $error = '';
@@ -132,6 +132,10 @@ Route::post('/register/{type}', function ($type) {
             dd($response);
           }
           
+        }
+        catch (GuzzleHttp\Exception\ClientException $e){
+          $response = json_decode($e->getResponse()->getBody());
+          $error = $response->message;
         }
         catch (Exception $e)
         {

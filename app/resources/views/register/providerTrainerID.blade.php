@@ -5,7 +5,6 @@
 @section('content')
 <div class="container">
   
-
   <div class="row full-height align-items-center justify-content-center register-form-container">
     <div class="col-md-5 text-white text-center">
       
@@ -21,7 +20,7 @@
             <a href="{{route('register-client')}}" class="btn btn-danger">cancel</a>
           </div>
           <div class="col-6">
-            <a href="" class="btn btn-green">Continue</a>
+            <a href="{{route('register-client')}}?trainer={{session('trainerID','')}}" class="btn btn-green">Continue</a>
           </div>
         </div>
       </div>
