@@ -21,14 +21,13 @@
           </div>
           <div class="form-group mt-5 text-center">
             <input type="submit" value="Login" class="btn btn-green btn-block mb-3">
-            <p class="lead text-secondary">Need an account?</p>
             <div class="dropdown show">
               <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Create Account
+                Need an account?
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{{route('register-client')}}">Client</a>
-                <a class="dropdown-item" href="{{route('register-trainer')}}">Trainer</a>
+                <a class="dropdown-item" href="{{route('register-client')}}">Register as Client</a>
+                <a class="dropdown-item" href="{{route('register-trainer')}}">Register as Trainer</a>
               </div>
             </div>
           </div>
