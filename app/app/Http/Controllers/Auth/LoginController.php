@@ -34,6 +34,7 @@ class LoginController extends Controller
             ]
         ]);
         
+        
         if($response->getStatusCode() == 200){
           $json = json_decode($response->getBody()->getContents());
 
@@ -54,6 +55,9 @@ class LoginController extends Controller
         switch($e->getResponse()->getStatusCode()){
           case "401":
             $data['error'] = 'Invalid email or password entered.';
+          break;
+          case "404":
+            $data['error'] = 'We could not find what you were looking for.';
           break;
           default:
             $ex = json_decode($e->getResponse()->getBody());

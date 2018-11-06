@@ -2,6 +2,9 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
+// Icons
+@import url('/open-iconic/font/css/open-iconic-bootstrap.css');
+
 // Variables
 @import 'variables';
 
@@ -11,16 +14,56 @@
 html,body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $primaryDark;
+  background-color: #06080e;
   height: 100vh;
 }
+input:focus { outline: none !important;box-shadow: none !important}
+
 .full-height{
   height: 100vh;
 }
 .btn-green{
   background-color: $brightGreen;
   color: #fff;
-  text-transform: uppercase;
   font-weight: bold;
   font-size: 18px;
+}
+.btn-trans{
+  background-color: rgba(128,128,128,.15);
+  border-radius: 0;
+  color: $white;
+  padding: 10px 40px;
+  font-weight: 600;
+  font-size: 18px;
+}
+.btn-trans:hover{
+  color: $brightGreen;
+  border-color: $brightGreen;
+}
+.text-light-gray{
+  color:$lightGray !important;
+}
+#login-logo{
+  border: .5px solid #48494e;
+}
+.container.login input{
+  border-radius: 0;
+}
+
+.container.login input:not([type="submit"]){
+  background: transparent;
+  border: none;
+  border-bottom:1px solid $lightGray;
+  font-size: 18px;
+}
+.container.login .input-group-text{
+  background-color: transparent;
+  border:0;
+  border-radius:0;
+  border-bottom:1px solid $lightGray;
+  position: relative;
+  top:0;
+}
+::-webkit-input-placeholder,::-moz-placeholder,::-ms-placeholder,::placeholder{
+  color:$white;
 }
