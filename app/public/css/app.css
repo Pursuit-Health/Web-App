@@ -10552,3 +10552,7 @@ input:focus {
   color: #ffffff;
 }
 
+.sidebar-sticky.trainer {
+  background-color: #1a1c21;
+}
+

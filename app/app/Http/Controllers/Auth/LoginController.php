@@ -50,7 +50,7 @@ class LoginController extends Controller
         } else {
           $data['error'] = $response;
         }
-      }
+      } 
       catch (\GuzzleHttp\Exception\ClientException $e) {
         switch($e->getResponse()->getStatusCode()){
           case "401":

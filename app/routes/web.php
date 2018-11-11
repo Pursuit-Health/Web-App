@@ -38,7 +38,7 @@ Route::post('/do-forgot-password', function () {
   
   try{
     $client = new GuzzleHttp\Client();
-    $response = $client->request('POST', 'https://gs.arizonawebdevelopment.com/public/v1/auth/forgot-password', [
+    $response = $client->request('POST', 'https://api.pursuithealthtech.com/v1/auth/forgot-password', [
       'headers' => ['Accept'     => 'application/json'],
         'form_params' => [
           'email' => $_POST['email']
@@ -49,7 +49,6 @@ Route::post('/do-forgot-password', function () {
       return view('forgot-password-sent');
     } else {
       $j = json_decode($response->getBody());
-      dd($j);
       $data['error'] = $j->message ;
     }
     

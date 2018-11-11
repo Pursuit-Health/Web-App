@@ -14,10 +14,22 @@
         <link href="/css/app.css" rel="stylesheet">
     </head>
     <body>
-      <?php $nav_template = 'templates.nav-'.session('user')->user_type;?>
-      @include($nav_template)
-      
-      @yield('content')
+    
+  
+
+    <div class="container-fluid">
+      <div class="row">
+        <?php $nav_template = 'templates.nav-'.session('user')->user_type;?>
+        @include($nav_template)
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          @yield('content')
+        </main>
+      </div>
+    </div>
+
+
+
       <script src="/js/app.js"></script>
     </body>
 </html>
